@@ -1,0 +1,51 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Korisnik (generated)" id="1682632063850-1">
+        <createTable tableName="order_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="product" type="VARCHAR(50)"/>
+            <column name="amount" type="INT"/>
+            <column name="purchase_order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Korisnik (generated)" id="1682632063850-2">
+        <createTable tableName="purchase_order">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="shipping_address" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Korisnik (generated)" id="1682632063850-3">
+        <insert tableName="order_item">
+            <column name="id" valueNumeric="1"/>
+            <column name="product" value="Product 1"/>
+            <column name="amount" valueNumeric="5"/>
+            <column name="purchase_order_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="order_item">
+            <column name="id" valueNumeric="2"/>
+            <column name="product" value="Product 2"/>
+            <column name="amount" valueNumeric="10"/>
+            <column name="purchase_order_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Korisnik (generated)" id="1682632063850-4">
+        <insert tableName="purchase_order">
+            <column name="id" valueNumeric="1"/>
+            <column name="shipping_address" value="Street 1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Korisnik (generated)" id="1682632063850-5">
+        <createIndex indexName="purchase_order_id" tableName="order_item">
+            <column name="purchase_order_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Korisnik (generated)" id="1682632063850-6">
+        <addForeignKeyConstraint baseColumnNames="purchase_order_id" baseTableName="order_item" constraintName="order_item_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="purchase_order" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
